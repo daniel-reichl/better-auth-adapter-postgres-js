@@ -11,7 +11,7 @@ permissions:
   contents: read
 
 jobs:
-  ci:
+  test:
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -51,5 +51,16 @@ jobs:
           postgres@${{ matrix.postgres-js }}
       - if: ${{ !matrix.better-auth }}
         run: npm run prepublishOnly
+      - if: ${{ !matrix.better-auth }}
+        run: npm publish --dry-run --ignore-scripts
       - if: matrix.better-auth
         run: npx vitest run --exclude test/adapter-suite.integration.test.ts
+
+  # Single stable check name to require in branch protection.
+  ci:
+    name: 🚧 ci passed
+    needs: test
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - run: test "${{ needs.test.result }}" = success
