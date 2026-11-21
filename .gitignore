@@ -1,0 +1,23 @@
+# Local
+**/.temp/
+**/*.local.*
+
+# Build
+**/dist/
+
+# Test
+**/coverage/
+
+# macOS system files
+_MACOSX/
+.DS_Store
+.DS_Store?
+.Spotlight-V100
+.Trashes
+
+# Windows system files
+ehthumbs.db
+Thumbs.db
+
+# Node
+node_modules/
