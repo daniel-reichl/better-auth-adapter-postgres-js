@@ -1,0 +1,55 @@
+{
+  "name": "better-auth-adapter-postgres-js",
+  "version": "1.0.0",
+  "description": "Better Auth database adapter for postgres.js",
+  "keywords": [
+    "better-auth",
+    "postgres",
+    "postgres.js",
+    "adapter"
+  ],
+  "license": "MIT",
+  "type": "module",
+  "sideEffects": false,
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "default": "./dist/index.js"
+    },
+    "./package.json": "./package.json"
+  },
+  "publishConfig": {
+    "access": "public",
+    "provenance": true
+  },
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json",
+    "check": "biome check . --write && tsc --noEmit",
+    "clean": "rm -rf dist node_modules",
+    "test": "vitest run",
+    "prepublishOnly": "biome ci . && tsc --noEmit && npm run test && npm run build"
+  },
+  "peerDependencies": {
+    "better-auth": ">=1.7.2 <2",
+    "postgres": "^3.4.0 || ^4.0.0"
+  },
+  "devDependencies": {
+    "@better-auth/core": "^1.7.27",
+    "@better-auth/test-utils": "^1.7.27",
+    "@biomejs/biome": "2.5.2",
+    "@dev-smili/cli": "1.0.0",
+    "@types/node": "24.13.2",
+    "better-auth": "^1.7.27",
+    "postgres": "4.0.0",
+    "typescript": "6.0.3",
+    "vitest": "5.1.1"
+  },
+  "engines": {
+    "node": ">=22"
+  }
+}

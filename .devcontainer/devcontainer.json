@@ -1,0 +1,22 @@
+// https://aka.ms/devcontainer.json
+{
+  "name": "better-auth-adapter-postgres-js",
+  "dockerComposeFile": "docker-compose.yaml",
+  "service": "devcontainer",
+  "workspaceFolder": "/ws",
+  "shutdownAction": "stopCompose",
+  "containerEnv": {
+    "DATABASE_URL": "postgres://user:password@postgres:5432/development"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/github-cli": {}
+  },
+  "postCreateCommand": "npm install",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "biomejs.biome"
+      ]
+    }
+  }
+}
