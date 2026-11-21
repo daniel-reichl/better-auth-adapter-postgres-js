@@ -41,12 +41,12 @@
   "devDependencies": {
     "@better-auth/core": "^1.7.27",
     "@better-auth/test-utils": "^1.7.27",
-    "@biomejs/biome": "2.5.2",
-    "@dev-smili/cli": "1.0.0",
-    "@types/node": "24.13.2",
+    "@biomejs/biome": "2.6.8",
+    "@dev-smili/cli": "1.1.0",
+    "@types/node": "26.6.6",
     "better-auth": "^1.7.27",
-    "postgres": "4.0.0",
-    "typescript": "6.0.3",
+    "postgres": "4.1.1",
+    "typescript": "7.0.2",
     "vitest": "5.1.1"
   },
   "engines": {
