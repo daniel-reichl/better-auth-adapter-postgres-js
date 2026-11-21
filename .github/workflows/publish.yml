@@ -33,5 +33,6 @@ jobs:
       - run: npm run build
       # Trusted publishing (OIDC) needs npm >= 11.5.1.
       - run: npm install -g npm@latest
+      - run: npm publish --dry-run --ignore-scripts
       # CI already ran lint and tests; prepublishOnly would need a database.
       - run: npm publish --ignore-scripts
