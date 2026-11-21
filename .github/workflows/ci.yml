@@ -1,0 +1,55 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+  workflow_call:
+
+permissions:
+  contents: read
+
+jobs:
+  ci:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - { node: 26, postgres: 18 }
+          # Oldest supported peer versions; the official adapter suites need a newer better-auth.
+          - { node: 22, postgres: 14, better-auth: 1.7.2, postgres-js: 3.4.0 }
+    services:
+      postgres:
+        image: postgres:${{ matrix.postgres }}
+        env:
+          POSTGRES_USER: user
+          POSTGRES_PASSWORD: password
+          POSTGRES_DB: test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U user"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+    env:
+      DATABASE_URL: postgres://user:password@localhost:5432/test
+    steps:
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - run: npm ci
+      - if: matrix.better-auth
+        run: >-
+          npm install --no-save --force
+          better-auth@${{ matrix.better-auth }}
+          @better-auth/core@${{ matrix.better-auth }}
+          postgres@${{ matrix.postgres-js }}
+      - if: ${{ !matrix.better-auth }}
+        run: npm run prepublishOnly
+      - if: matrix.better-auth
+        run: npx vitest run --exclude test/adapter-suite.integration.test.ts
