@@ -1,6 +1,6 @@
 {
   "name": "better-auth-adapter-postgres-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Better Auth database adapter for postgres.js",
   "keywords": [
     "better-auth",
@@ -9,6 +9,10 @@
     "adapter"
   ],
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/daniel-reichl/better-auth-adapter-postgres-js.git"
+  },
   "type": "module",
   "sideEffects": false,
   "files": [

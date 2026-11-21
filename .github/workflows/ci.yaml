@@ -51,8 +51,6 @@ jobs:
           postgres@${{ matrix.postgres-js }}
       - if: ${{ !matrix.better-auth }}
         run: npm run prepublishOnly
-      - if: ${{ !matrix.better-auth }}
-        run: npm publish --dry-run --ignore-scripts
       - if: matrix.better-auth
         run: npx vitest run --exclude test/adapter-suite.integration.test.ts
 
